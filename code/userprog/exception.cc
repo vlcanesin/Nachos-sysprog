@@ -82,6 +82,15 @@ ExceptionHandler (ExceptionType which)
                     interrupt->Powerdown ();
                     break;
                   }
+                #ifdef CHANGED
+                  case SC_PutChar:
+                    {
+                      DEBUG ('s', "Putchar\n");
+                      char c_to_put = (char) machine->ReadRegister(4);
+                      consoledriver->PutChar (c_to_put);
+                      break;
+                    }
+                #endif
                 default:
                   {
                     ASSERT_MSG(FALSE, "Unimplemented system call %d\n", type);
