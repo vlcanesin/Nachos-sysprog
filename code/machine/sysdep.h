@@ -57,6 +57,12 @@ extern int Random(void);
 extern char *AllocBoundedArray(int size);
 extern void DeallocBoundedArray(char *p, int size);
 
+#ifdef USER_PROGRAM	
+    #ifdef CHANGED
+        extern unsigned copyStringFromMachine(int from, char *to, unsigned size);
+    #endif
+#endif
+
 // Other C library routines that are used by Nachos.
 // These are assumed to be portable, so we don't include a wrapper.
 extern "C" {

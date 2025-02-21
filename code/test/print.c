@@ -1,6 +1,6 @@
 #include "syscall.h"
 
-void print(char c, int n)
+void printChar(char c, int n)
 {
     int i;
     for (i = 0; i < n; i++) {
@@ -11,6 +11,9 @@ void print(char c, int n)
 
 int main()
 {
-    print('a', 6);
+    printChar('a', 6);
+    
+    PutString("12345678ABCDE funcionou!\n");
+
     Halt();
 }

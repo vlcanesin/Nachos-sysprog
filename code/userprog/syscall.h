@@ -34,6 +34,7 @@
 
 #ifdef CHANGED
     #define SC_PutChar 11
+    #define SC_PutString 12
 #endif
 
 #ifdef IN_USER_MODE
@@ -137,6 +138,9 @@ void Yield (void);
 #if CHANGED
     /* Uses the console driver to put a character in the terminal */
     void PutChar(char c);
+
+    /* Uses the console driver to put a string in the terminal */
+    void PutString(const char* s);
 #endif
 
 #endif // IN_USER_MODE

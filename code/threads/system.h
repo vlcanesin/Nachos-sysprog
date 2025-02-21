@@ -36,6 +36,7 @@ extern Machine *machine;        // user program memory and registers
     #ifdef CHANGED
         #include "consoledriver.h"
         extern ConsoleDriver *consoledriver;
+        #define MAX_STRING_SIZE 8
     #endif
 #endif
 

@@ -166,10 +166,13 @@ PutChar:
         j        $31
         .end   PutChar
 
-
-        .globl Exit
-        .ent   Exit
-
+        .globl PutString
+        .ent   PutString
+PutString:
+        addiu $2,$0,SC_PutString
+        syscall
+        j        $31
+        .end   PutString
 
 
 /* dummy function only to keep gcc happy, it's not actually used */

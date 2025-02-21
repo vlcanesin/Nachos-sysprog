@@ -90,6 +90,21 @@ ExceptionHandler (ExceptionType which)
                       consoledriver->PutChar (c_to_put);
                       break;
                     }
+                  case SC_PutString:
+                    {
+                      DEBUG ('s', "PutString\n");
+                      int mem_to_copy = machine->ReadRegister(4);  // is it the right register?
+                      char* str = (char*) malloc(MAX_STRING_SIZE);
+                      ASSERT(str != NULL);
+                      // Considers the '\0' character
+                      while(copyStringFromMachine(mem_to_copy, str, MAX_STRING_SIZE) == MAX_STRING_SIZE-1) {
+                        consoledriver->PutString (str);
+                        mem_to_copy += MAX_STRING_SIZE-1;
+                      }
+                      consoledriver->PutString (str);
+                      free(str);
+                      break;
+                    }
                 #endif
                 default:
                   {

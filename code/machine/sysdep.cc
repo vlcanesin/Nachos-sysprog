@@ -548,3 +548,32 @@ DeallocBoundedArray(char *ptr, int size)
     mprotect(ptr + size, pgSize, PROT_READ | PROT_WRITE | PROT_EXEC);
     delete [] (ptr - pgSize);
 }
+
+#ifdef CHANGED
+    #ifdef USER_PROGRAM				
+
+    //----------------------------------------------------------------------
+    //  copyStringFromMachine
+    //	Copy size bytes from a MIPS memory address to a char* in user-space
+    //
+    //	"from" -- initial address to copy in MIPS-space
+    //	"to" -- string in user-space to which the value is copied to
+    //  "size" -- number of bytes (characters) of the string 
+    //----------------------------------------------------------------------
+
+    unsigned copyStringFromMachine(int from, char *to, unsigned size) {
+        unsigned c_read = 0;
+        char* to_copy = to;
+        int c_machine;
+        for(unsigned i = 0; i < size-1; i++) {
+            machine->ReadMem(from+i, 1, &c_machine);
+            if(c_machine == '\0') break;
+            *(to_copy++) = (char) c_machine;
+            c_read++;
+        }
+        *to_copy = '\0';
+        return c_read;
+    }
+
+    #endif
+#endif
