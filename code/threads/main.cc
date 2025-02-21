@@ -118,6 +118,9 @@ main (int argc, char **argv)
           if (!strcmp (*argv, "-x"))
             {                        // run a user program
                 ASSERT_MSG (argc > 1, "-x needs a program name\n");
+                #ifdef CHANGED
+                  consoledriver = new ConsoleDriver(NULL, NULL);
+                #endif
                 StartProcess (*(argv + 1));
                 argCount = 2;
             }
@@ -132,6 +135,19 @@ main (int argc, char **argv)
                       argCount = 3;
                   }
             }
+          #if CHANGED
+          else if (!strcmp (*argv, "-sc"))
+            {
+                if (argc == 1)
+                    ConsoleDriverTest (NULL, NULL);
+                else
+                  {
+                      ASSERT_MSG (argc > 2, "-c needs two file names\n");
+                      ConsoleDriverTest (*(argv + 1), *(argv + 2));
+                      argCount = 3;
+                  }
+            }
+          #endif // CHANGED
 #endif // USER_PROGRAM
 #ifdef FILESYS
           if (!strcmp (*argv, "-cp"))

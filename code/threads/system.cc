@@ -33,6 +33,9 @@ SynchDisk *synchDisk;
 
 #ifdef USER_PROGRAM		// requires either FILESYS or FILESYS_STUB
 Machine *machine;		// user program memory and registers
+    #ifdef CHANGED
+        ConsoleDriver *consoledriver;
+    #endif
 #endif
 
 #ifdef NETWORK
@@ -230,6 +233,15 @@ Cleanup ()
         delete machine;
         machine = NULL;
     }
+#endif
+
+#ifdef CHANGED
+#ifdef USER_PROGRAM
+    if(consoledriver) {
+        delete consoledriver;
+        consoledriver = NULL;
+    }
+#endif
 #endif
 
 #ifdef FILESYS_NEEDED
