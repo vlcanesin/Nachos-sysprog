@@ -83,6 +83,14 @@ ExceptionHandler (ExceptionType which)
                     break;
                   }
                 #ifdef CHANGED
+                  case SC_Exit:
+                    {
+                      DEBUG ('s', "Shutdown, end of the program.\n");
+                      // char c_to_put = (char) machine->ReadRegister(4);  // get return value (?)
+                      // consoledriver->PutChar (c_to_put);
+                      interrupt->Powerdown ();
+                      break;
+                    }
                   case SC_PutChar:
                     {
                       DEBUG ('s', "Putchar\n");

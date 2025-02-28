@@ -15,5 +15,5 @@ int main()
     
     PutString("12345678ABCDE funcionou!\n");
 
-    Halt();
+    //Halt();
 }
