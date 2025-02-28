@@ -21,6 +21,8 @@
 // All rights reserved.  See copyright.h for copyright notice and limitation
 // of liability and disclaimer of warranty provisions.
 
+#include <cstdio>
+
 #include "copyright.h"
 #include "system.h"
 #include "syscall.h"
@@ -85,9 +87,10 @@ ExceptionHandler (ExceptionType which)
                 #ifdef CHANGED
                   case SC_Exit:
                     {
-                      DEBUG ('s', "Shutdown, end of the program.\n");
-                      // char c_to_put = (char) machine->ReadRegister(4);  // get return value (?)
-                      // consoledriver->PutChar (c_to_put);
+                      int retval = machine->ReadRegister(4);  // gets return value (?)
+                      char msg[100];
+                      snprintf(msg, sizeof(msg), "Shutdown, exited the program with code %d\n", retval);
+                      DEBUG ('s', msg);
                       interrupt->Powerdown ();
                       break;
                     }
