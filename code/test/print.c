@@ -12,7 +12,8 @@ void printChar(char c, int n)
 int main()
 {
     printChar('a', 6);
-    
+    printChar('e', 6);
+
     PutString("12345678ABCDE funcionou!\n");
 
     //Halt();
